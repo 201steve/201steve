@@ -1,28 +1,67 @@
-import React from "react";
+import React, { Component } from "react";
 import User from "./user";
 
-class App extends React.Component {
+export class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      users: [
-        { id: "kimkim1", pwd: "123456", name: "Kim" },
-        { id: "leelee2", pwd: "234567", name: "Lee" },
-        { id: "baebae3", pwd: "345678", name: "Bae" },
-        { id: "parkpark4", pwd: "456789", name: "Park" },
-      ],
+      userInfomation: [],
+      id: 1,
+      userName: "test",
+      value: "",
     };
   }
+  getValue = (e) => {
+    this.setState({
+      value: e.target.value,
+    });
+  };
+
+  userInfo = () => {
+    const { userInfomation, id, userName, value } = this.state;
+    const obj = {
+      id: id,
+      userName: userName,
+      value: value,
+    };
+    const newUserInfo = userInfomation.concat(obj);
+    this.setState({
+      id: id + 1,
+      userName: userName + 1,
+      userInfomation: newUserInfo,
+      value: "",
+    });
+  };
+
+  pressEnter = (e) => {
+    if (e.key === "Enter") {
+      this.userInfo();
+    }
+  };
 
   render() {
-    const newUsers = this.state.users.map((user, index) => {
-      return <User key={index} info={user} />;
-    });
+    const { userInfomation } = this.state;
+    console.log(userInfomation);
+
+    const newUserInfo = userInfomation.map((user) => (
+      <div key={user.id}>
+        <div>
+          <b>{user.userName}</b>
+          {user.value}
+        </div>
+      </div>
+    ));
     return (
-      <div className="App">
-        <input />
-        {newUsers}
-        <button>게시</button>
+      <div>
+        <input onChange={this.getValue} onKeyPress={this.pressEnter} />
+        <button onClick={this.userInfo}>게시</button>
+        <User
+          userName={this.state.userName}
+          reply={this.state.value}
+          id={this.state.id}
+          userinfo={newUserInfo}
+        />
       </div>
     );
   }
