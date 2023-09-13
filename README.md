@@ -1,4 +1,5 @@
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=201steve&theme=dark&show_icons=true&hide=stars,contribs&count_private=true)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=201steve&count_private=true&show_icons=true&hide_border=true)
+
 
 I like to develop with React.js ⚛
 
